@@ -37,8 +37,8 @@ public class User {
 
     @ManyToMany
     @JoinTable(
-            name = "user_authourity",
+            name = "user_authority",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "authority_name")})
-    private Set<Authority> anAuthorities;
+    private Set<Authority> authorities;
 }

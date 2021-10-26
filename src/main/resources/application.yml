@@ -12,13 +12,14 @@ spring:
     initialization-mode: always
 
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialoect
+    database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: create-drop
     properties:
-      hiberanete:
+      hibernate:
         format_sql: true
         show_sql: true
+    defer-datasource-initialization: true
 
 logging:
   level:
