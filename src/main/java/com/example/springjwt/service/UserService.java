@@ -23,12 +23,12 @@ public class UserService {
     }
 
     @Transactional
-    public User signup(UserDto userDto) {
+    public User signup(UserDto userDto) { //회원가입
         if (userRepository.findOneWithAuthoritiesByUsername(userDto.getUsername()).orElse(null) != null) {
             throw new DuplicateMemberException("이미 가입되어 있는 유저입니다.");
         }
 
-        //빌더 패턴의 장점
+        //권한정보 - user, admin
         Authority authority = Authority.builder()
                 .authorityName("ROLE_USER")
                 .build();
@@ -45,12 +45,12 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
-    public Optional<User> getUserWithAuthorities(String username) {
+    public Optional<User> getUserWithAuthorities(String username) { //DB에서 user정보
         return userRepository.findOneWithAuthoritiesByUsername(username);
     }
 
     @Transactional(readOnly = true)
-    public Optional<User> getMyUserWithAuthorities() {
+    public Optional<User> getMyUserWithAuthorities() { // security context에 저장된 user정보
         return SecurityUtil.getCurrentUsername().flatMap(userRepository::findOneWithAuthoritiesByUsername);
     }
 }
